@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_flow/features/user_settings/presentation/pages/changing_avatar_page.dart';
 
 class ProfileTab extends StatelessWidget {
   const ProfileTab({super.key});
@@ -15,9 +16,12 @@ class ProfileTab extends StatelessWidget {
             children: [
               const SizedBox(height: 24),
               const Center(
-                child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: NetworkImage('https://picsum.photos/200'),
+                child: Hero(
+                  tag: "ProfileAvatar",
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage('https://picsum.photos/200'),
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
@@ -71,8 +75,14 @@ class ProfileTab extends StatelessWidget {
               const SizedBox(height: 8),
               const _SettingsItem(icon: Icons.key_outlined, itemText: "Change account password"),
               const SizedBox(height: 8),
-              const _SettingsItem(
-                  icon: Icons.camera_alt_outlined, itemText: "Change account Image"),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const ChangingAvatarPage()));
+                },
+                child: const _SettingsItem(
+                    icon: Icons.camera_alt_outlined, itemText: "Change account Image"),
+              ),
               const SizedBox(height: 16),
               const Text('TaskFlow', style: TextStyle(color: Colors.white54, fontSize: 14)),
               const SizedBox(height: 8),
@@ -108,7 +118,7 @@ class ProfileTab extends StatelessWidget {
 }
 
 class _SettingsItem extends StatelessWidget {
-  const _SettingsItem({super.key, required this.icon, required this.itemText});
+  const _SettingsItem({required this.icon, required this.itemText});
 
   final IconData icon;
   final String itemText;

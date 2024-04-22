@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:task_flow/features/categories/presentation/pages/categories_page.dart';
+import 'package:task_flow/core/updates_navigator.dart';
 import 'package:task_flow/features/home_screen/presentation/pages/tabs/calendar_tab.dart';
 import 'package:task_flow/features/home_screen/presentation/pages/tabs/focus_tab.dart';
 import 'package:task_flow/features/home_screen/presentation/pages/tabs/index_tab.dart';
-import 'package:task_flow/features/home_screen/presentation/pages/tabs/profile_tab.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,7 +20,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     const IndexTab(),
     const CalendarTab(),
     const FocusTab(),
-    const ProfileTab(),
+    const UpdatesNavigator()
+    // const ProfileTab(),
   ];
 
   final pagesName = [
@@ -75,7 +75,90 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         children: pages,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _scaffoldHomeKey.currentState?.showBottomSheet((context) => Container(
+                padding: const EdgeInsets.all(25),
+                height: 320,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.surface,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Text(
+                          "Add Task",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          textAlign: TextAlign.left,
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "What to do?",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: "Description",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 14),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.timer_outlined,
+                              size: 24,
+                            )),
+                        const SizedBox(width: 34),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.tag,
+                              size: 24,
+                            )),
+                        const SizedBox(width: 34),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.flag_outlined,
+                              size: 24,
+                            )),
+                        const Spacer(),
+                        IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.send,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 24,
+                            )),
+                      ],
+                    )
+                  ],
+                ),
+              ));
+        },
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
         shape: const CircleBorder(),
@@ -100,12 +183,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
               title: const Text('Categories'),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CategoriesPage(),
-                  ),
-                );
+                Navigator.pushNamed(context, '/categories');
               },
             ),
             ListTile(

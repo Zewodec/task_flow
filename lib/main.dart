@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:task_flow/features/user_settings/presentation/pages/changing_avatar_page.dart';
 
+import 'features/categories/presentation/pages/categories_page.dart';
 import 'features/login/presentation/pages/login_page.dart';
 import 'features/register/presentation/pages/registration_page.dart';
 
@@ -23,7 +25,13 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.latoTextTheme(),
         useMaterial3: true,
       ),
-      home: const WelcomePage(),
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegistrationPage(),
+        '/categories': (context) => const CategoriesPage(),
+        '/settings/change_avatar': (context) => const ChangingAvatarPage(),
+      },
     );
   }
 }
@@ -72,10 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   height: 48,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const LoginPage()),
-                      );
+                      Navigator.pushNamed(context, '/login');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -95,10 +100,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   height: 48,
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const RegistrationPage()),
-                      );
+                      Navigator.pushNamed(context, '/register');
                     },
                     style: OutlinedButton.styleFrom(
                       side: BorderSide(

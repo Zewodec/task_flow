@@ -7,8 +7,8 @@ class ChangingAvatarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Avatar"),
-      ),
+          // title: const Text("Change Avatar"),
+          ),
       body: SafeArea(
         child: Center(
           child: Column(

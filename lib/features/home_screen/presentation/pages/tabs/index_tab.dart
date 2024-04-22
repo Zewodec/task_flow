@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:task_flow/features/task_card/presentation/pages/task_card.dart';
 
 import '../../widgets/task_widget.dart';
 
@@ -46,19 +48,45 @@ class IndexTab extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                const TaskWidget(
-                    taskName: 'Do Math Homework',
-                    taskDate: 'Today At 16:45',
-                    taskTag: 'University',
-                    tagColor: Color(0xFF809CFF),
-                    taskPriority: 1),
+                InkWell(
+                  onTap: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TaskCard(
+                          categoryName: 'University',
+                        ),
+                      ),
+                    );
+                    Fluttertoast.showToast(msg: result.toString());
+                  },
+                  child: const TaskWidget(
+                      taskName: 'Do Math Homework',
+                      taskDate: 'Today At 16:45',
+                      taskTag: 'University',
+                      tagColor: Color(0xFF809CFF),
+                      taskPriority: 1),
+                ),
                 const SizedBox(height: 16),
-                const TaskWidget(
-                    taskName: 'Do Math Homework',
-                    taskDate: 'Today At 16:45',
-                    taskTag: 'Home',
-                    tagColor: Color(0xFFFF8080),
-                    taskPriority: 2),
+                InkWell(
+                  onTap: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TaskCard(
+                          categoryName: 'Home',
+                        ),
+                      ),
+                    );
+                    Fluttertoast.showToast(msg: result.toString());
+                  },
+                  child: const TaskWidget(
+                      taskName: 'Do Math Homework',
+                      taskDate: 'Today At 16:45',
+                      taskTag: 'Home',
+                      tagColor: Color(0xFFFF8080),
+                      taskPriority: 2),
+                ),
                 const SizedBox(height: 16),
                 const TaskWidget(
                     taskName: 'Business meeting with CEO',
